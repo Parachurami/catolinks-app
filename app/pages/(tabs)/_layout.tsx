@@ -1,5 +1,6 @@
 import TabBarIndicator from '@/app/components/TabBarIndicator';
 import TabBarLabel from '@/app/components/TabBarLabel';
+import { useSystemTheme } from '@/app/hooks/useSystemTheme';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useFonts } from 'expo-font';
@@ -10,6 +11,7 @@ import Advanced from './advanced';
 const Tab = createMaterialTopTabNavigator();
 
 const TabsLayout = () =>{
+    const {themeData} = useSystemTheme()
     const [fontsLoaded] = useFonts(
         {
             'Inter': require('../../../assets/fonts/Inter (1)/static/Inter_18pt-Regular.ttf'),
@@ -24,17 +26,25 @@ const TabsLayout = () =>{
     }
     
     return(
-        <View className='flex-1 flex'>
-            <View className='flex-[1] flex bg-black'>
-                <Pressable className='mt-10 ml-16'>
-                    <AntDesign name="close" size={24} color="white" />
+        <View style={{backgroundColor:themeData.backgroundColor}} className='flex-1 flex bg-black'>
+            <View style={{backgroundColor:themeData.backgroundColor}} className='flex-[1] w-full flex bg-black'>
+                <Pressable className='mt-20 flex' style={{position:'absolute', left:20}}>
+                    <AntDesign name="close" size={24} color={themeData.textColor} />
                 </Pressable>
             </View>
-            <View className='flex-[7] flex'>
+            <View className='flex-[7] flex px-6'>
                 <Tab.Navigator
                     screenOptions={{
                         tabBarLabel:({focused, children}) => <TabBarLabel focused={focused}>{children}</TabBarLabel>,
-                        
+                        tabBarStyle:{
+                            backgroundColor:themeData.backgroundColor,
+                            shadowColor:'transparent',
+                            elevation:0,
+                            shadowOffset:{
+                                height:0,
+                                width:0
+                            }
+                        },
                         tabBarIndicator:({state, width}) => <TabBarIndicator width={width} state={state} />,
                         swipeEnabled:false
                     }}

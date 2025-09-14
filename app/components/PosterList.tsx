@@ -8,7 +8,7 @@ const PosterList = () => {
     const selectCard = (id:number) => setSelectedCard(id);
     // console.log(selectedCard)
     return (
-        <ScrollView className='w-full flex' horizontal>
+        <ScrollView className='w-full flex' horizontal showsHorizontalScrollIndicator={false}>
             <View className='w-full flex flex-row gap-3'>
             {
                 posters.map((poster, index) =>{

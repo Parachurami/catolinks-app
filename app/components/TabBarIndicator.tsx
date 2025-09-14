@@ -6,7 +6,7 @@ import { View } from 'react-native'
 const TabBarIndicator = ({width, state,}:{width:number | any, state: TabNavigationState<ParamListBase>}) =>{
     return (
         <>
-            <View className='w-full bg-black h-full'>
+            <View style={{backgroundColor:'transparent'}} className='w-full h-full'>
 
             </View>
             <View className='w-full h-[5px] absolute bottom-0 flex flex-1 flex-row'>
